@@ -50,10 +50,10 @@ class BankAccount {
     public boolean deposit(double amount) {
         if (amount > 0) {
             accountBalance += amount;
-            System.out.println("Deposited " + amount + " units. New balance: " + accountBalance);
+            
             return true;
         } else {
-            System.out.println("Invalid deposit amount.");
+           
             return false;
         }
     }
@@ -62,14 +62,14 @@ class BankAccount {
         if (amount > 0) {
             if (accountBalance >= amount) {
                 accountBalance -= amount;
-                System.out.println("Withdrawn " + amount + " units. New balance: " + accountBalance);
+                
                return true;
             } else {
-                System.out.println("Insufficient funds for withdrawal.");
+                
                 return false;
             }
         } else {
-            System.out.println("Invalid withdrawal amount.");
+            
             return false;
         }
     }
@@ -121,10 +121,18 @@ public class Main {
         account.setAccountBalance(initialBalance);
 
         System.out.println("Initial balance: " + account.getAccountBalance());
-
+        
+        while (true) {
         System.out.print("Enter deposit amount: ");
         double depositAmount = scanner.nextDouble();
-        System.out.println("Deposit Status: " + account.deposit(depositAmount));
+        boolean depositStatus = account.deposit(depositAmount);
+        if (!depositStatus) {
+                System.out.println("Withdraw Status: Invalid");
+            } else {
+                System.out.println("Withdraw Status: true");
+                break;
+            }
+       }
         
        while (true) {
             System.out.print("Enter withdrawal amount: ");
