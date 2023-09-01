@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 class BankAccount {
     private String accountNumber;
     private double accountBalance;
@@ -45,44 +47,101 @@ class BankAccount {
         this.phoneNumber = phoneNumber;
     }
 
-    public void deposit(double amount) {
+    public boolean deposit(double amount) {
         if (amount > 0) {
             accountBalance += amount;
             System.out.println("Deposited " + amount + " units. New balance: " + accountBalance);
+            return true;
         } else {
             System.out.println("Invalid deposit amount.");
+            return false;
         }
     }
-
-    public void withdraw(double amount) {
+        
+    public boolean withdraw(double amount) {
         if (amount > 0) {
             if (accountBalance >= amount) {
                 accountBalance -= amount;
                 System.out.println("Withdrawn " + amount + " units. New balance: " + accountBalance);
+               return true;
             } else {
                 System.out.println("Insufficient funds for withdrawal.");
+                return false;
             }
         } else {
             System.out.println("Invalid withdrawal amount.");
+            return false;
         }
     }
 }
-
+/*
 public class Main {
     public static void main(String[] args) {
         BankAccount account = new BankAccount();
         account.setAccountNumber("11300246");
-        account.setCustomerName("Zyguel Philip E. Cabogoy");
+        account.setCustomerName("Zygue Philip E. Cabogoy");
         account.setEmail("11300246@usc.edu.ph");
-        account.setPhoneNumber("123-699-9990");
+        account.setPhoneNumber("09143143143");
         account.setAccountBalance(1000.0);
 
         System.out.println("Initial balance: " + account.getAccountBalance());
 
-        account.deposit(500.0);
-        account.withdraw(200.0);
-        account.withdraw(1500.0); // This should show insufficient funds
+     
+        System.out.println("Deposit Status  : " + account.deposit(500.0));
+   
+        System.out.println("Withdraw Status  : " + account.withdraw(200.0));
 
+        System.out.println("Withdraw Status  : " + account.withdraw(1500.0));
+    
         System.out.println("Final balance: " + account.getAccountBalance());
     }
+}*/
+//import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        BankAccount account = new BankAccount();
+
+        System.out.print("Enter account number: ");
+        account.setAccountNumber(scanner.nextLine());
+
+        System.out.print("Enter customer name: ");
+        account.setCustomerName(scanner.nextLine());
+
+        System.out.print("Enter email: ");
+        account.setEmail(scanner.nextLine());
+
+        System.out.print("Enter phone number: ");
+        account.setPhoneNumber(scanner.nextLine());
+
+        System.out.print("Enter initial account balance: ");
+        double initialBalance = scanner.nextDouble();
+        account.setAccountBalance(initialBalance);
+
+        System.out.println("Initial balance: " + account.getAccountBalance());
+
+        System.out.print("Enter deposit amount: ");
+        double depositAmount = scanner.nextDouble();
+        System.out.println("Deposit Status: " + account.deposit(depositAmount));
+        
+       while (true) {
+            System.out.print("Enter withdrawal amount: ");
+            double withdrawalAmount = scanner.nextDouble();
+            boolean withdrawalStatus = account.withdraw(withdrawalAmount);
+            
+            if (!withdrawalStatus) {
+                System.out.println("Withdraw Status: Invalid");
+            } else {
+                System.out.println("Withdraw Status: true");
+                break;
+            }
+        }
+
+        System.out.println("Final balance: " + account.getAccountBalance());
+
+        scanner.close();
+    }
 }
+
