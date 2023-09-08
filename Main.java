@@ -50,29 +50,19 @@ class BankAccount {
     public boolean deposit(double amount) {
         if (amount > 0) {
             accountBalance += amount;
-            
             return true;
-        } else {
-           
-            return false;
         }
+        return false;
     }
         
     public boolean withdraw(double amount) {
         if (amount > 0) {
             if (accountBalance >= amount) {
                 accountBalance -= amount;
-                
-               return true;
-            } else {
-                
-                return false;
-            }
-        } else {
-            
-            return false;
+                return true;
+            } 
+            return false;   
         }
-    }
 }
 /*
 public class Main {
